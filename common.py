@@ -100,6 +100,22 @@ def create_survey_query(survey_id):
     return query
 
 
+
+def create_survey_query_extended(survey_id):
+    query = f"""
+    SELECT CONVERT(NVARCHAR(50), Id) AS SurveyId,
+        CONVERT(NVARCHAR(50), AnalyzerId) AS AnalyzerId,
+        StartEpoch,
+        EndEpoch,
+        EndDateTime   AS EndDateTimeSurvey,
+        DrivingLengthMeters / 1000 AS DrivingLengthKM
+    FROM Survey
+    WHERE Id = '{survey_id}'      
+    """
+    return query
+
+
+
 def create_peak_query(emission_source_id):
     query = f"""
     SELECT CONVERT(NVARCHAR(50), P.Id)                  AS PeakId,
